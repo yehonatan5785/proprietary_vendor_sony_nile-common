@@ -58,8 +58,7 @@ PRODUCT_COPY_FILES += \
     vendor/sony/nile-common/proprietary/vendor/etc/idd.fstab:$(TARGET_COPY_OUT_VENDOR)/etc/idd.fstab \
     vendor/sony/nile-common/proprietary/vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.bluetooth@1.0-service-qti.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/android.hardware.drm@1.1-service.widevine.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.drm@1.1-service.widevine.rc \
-    vendor/sony/nile-common/proprietary/vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc \
-    vendor/sony/nile-common/proprietary/vendor/etc/init/android.hardware.gnss@2.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.gnss@2.0-service-qti.rc \
+    vendor/sony/nile-common/proprietary/vendor/etc/init/android.hardware.gnss@2.1-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.gnss@2.1-service-qti.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/cnd.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/cnd.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/dataqti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/dataqti.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/dpmQmiMgr.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/dpmQmiMgr.rc \
@@ -76,6 +75,7 @@ PRODUCT_COPY_FILES += \
     vendor/sony/nile-common/proprietary/vendor/etc/init/netmgrd.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/netmgrd.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/port-bridge.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/port-bridge.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/qcrild.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/qcrild.rc \
+    vendor/sony/nile-common/proprietary/vendor/etc/init/qseecomd.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/qseecomd.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/vendor.display.color@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.display.color@1.0-service.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc \
     vendor/sony/nile-common/proprietary/vendor/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc \
@@ -143,21 +143,21 @@ PRODUCT_PACKAGES += \
     libEGL_adreno \
     libGLESv1_CM_adreno \
     libGLESv2_adreno \
-    libQTapGLES \
     libq3dtools_adreno \
-    vulkan.sdm660 \
+    libq3dtools_esx \
+    vulkan.adreno \
     libC2D2 \
     libCB \
     libOpenCL \
     libQSEEComAPI \
-    libRSDriver_adreno \
+    libVkLayer_q3dtools \
     libadreno_utils \
     libadsp_default_listener \
     libadsprpc \
-    libbccQTI \
     libc2d30_bltlib \
     libdiag \
     libdsutils \
+    libgpudataproducer \
     libgsl \
     libhdcprx_module \
     libhdcptx_module \
@@ -172,10 +172,10 @@ PRODUCT_PACKAGES += \
     libqmi_encdec \
     libqmiservices \
     librs_adreno \
-    librs_adreno_sha1 \
     libsensor1 \
     libstagefright_hdcp \
     libthermalclient \
+    libtinyxml2_1 \
     libwvhidl \
     libwvtee \
     sound_trigger.primary.sdm660 \
@@ -218,7 +218,6 @@ PRODUCT_PACKAGES += \
     libqcvirt \
     libznrwrapper \
     com.fingerprints.extension@1.0 \
-    com.qualcomm.qti.ant@1.0 \
     com.qualcomm.qti.dpm.api@1.0_vendor \
     com.qualcomm.qti.imscmservice@2.0_vendor \
     com.qualcomm.qti.imscmservice@2.1_vendor \
@@ -228,8 +227,9 @@ PRODUCT_PACKAGES += \
     fpc_tac \
     android.hardware.bluetooth@1.0-impl-qti \
     android.hardware.gatekeeper@1.0-impl-qti \
-    android.hardware.gnss@2.0-impl-qti \
-    vendor.qti.gnss@3.0-impl \
+    android.hardware.gnss@2.1-impl-qti \
+    com.dsi.ant@1.0-impl \
+    vendor.qti.gnss@4.2-impl \
     vendor.qti.hardware.fm@1.0-impl \
     vendor.qti.hardware.qteeconnector@1.0-impl \
     lib-imscmservice \
@@ -248,8 +248,12 @@ PRODUCT_PACKAGES += \
     libGPreqcancel_svc \
     libMiscTaWrapper \
     libStDrvInt \
+    libasn1cper \
+    libasn1crt \
+    libasn1crtx \
     libbatching \
     libbtnv \
+    libcdfw_remote_api \
     libcne \
     libcneapiclient \
     libcneoplookup \
@@ -281,6 +285,7 @@ PRODUCT_PACKAGES += \
     liblocationservice_glue \
     liblowi_client \
     liblqe \
+    libminksocket \
     libmiscta \
     libnetmgr \
     libnetmgr_common \
@@ -290,6 +295,8 @@ PRODUCT_PACKAGES += \
     libperipheral_client \
     libpn553_fw \
     libprotobuf-c-idd \
+    libqcbor \
+    libqcc_file_agent \
     libqcmaputils \
     libqcrilFramework \
     libqdi \
@@ -319,17 +326,19 @@ PRODUCT_PACKAGES += \
     libsecureui_svcsock \
     libsensor_reg \
     libsettings \
+    libsoc_helper \
     libssd \
     libsystem_health_mon \
     libta \
     libthermalioctl \
     libtime_genoff \
-    libtinyxml2_1 \
     libtpm \
     libwms \
     libwqe \
     libxml \
     libxtadapter \
+    libxtwifi_server_protocol \
+    libxtwifi_server_protocol_uri_v3 \
     qcrild_librilutils \
     qtibus \
     qtimutex \
@@ -344,7 +353,12 @@ PRODUCT_PACKAGES += \
     vendor.qti.gnss@2.0 \
     vendor.qti.gnss@2.1 \
     vendor.qti.gnss@3.0 \
+    vendor.qti.gnss@4.0 \
+    vendor.qti.gnss@4.1 \
+    vendor.qti.gnss@4.2-service \
+    vendor.qti.gnss@4.2 \
     vendor.qti.hardware.bluetooth_sar@1.0 \
+    vendor.qti.hardware.bluetooth_sar@1.1 \
     vendor.qti.hardware.data.cne.internal.api@1.0 \
     vendor.qti.hardware.data.cne.internal.constants@1.0 \
     vendor.qti.hardware.data.cne.internal.server@1.0 \
@@ -355,6 +369,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.data.latency@1.0 \
     vendor.qti.hardware.data.qmi@1.0 \
     vendor.qti.hardware.fm@1.0_vendor \
+    vendor.qti.hardware.qccsyshal@1.0 \
     vendor.qti.hardware.qteeconnector@1.0 \
     vendor.qti.hardware.radio.am@1.0 \
     vendor.qti.hardware.radio.atcmdfwd@1.0 \
@@ -436,8 +451,7 @@ PRODUCT_PACKAGES += \
     com.qti.dpmframework \
     dpmapi \
     qcrilhook \
-    android.hardware.gnss@2.0-service-qti.xml \
-    vendor.qti.gnss@3.0-service.xml \
+    vendor.qti.gnss@4.2-service.xml \
     ATFWD-daemon \
     adsprpcd \
     cnd \
@@ -448,7 +462,7 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service-qti \
     android.hardware.drm@1.1-service.widevine \
     android.hardware.gatekeeper@1.0-service-qti \
-    android.hardware.gnss@2.0-service-qti \
+    android.hardware.gnss@2.1-service-qti \
     qcrild \
     vendor.display.color@1.0-service \
     vendor.qti.hardware.qteeconnector@1.0-service \
